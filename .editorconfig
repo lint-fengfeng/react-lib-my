@@ -1,0 +1,17 @@
+# 项目根目录下的这个值要 为true, 配置这一个就可以用了
+root = true
+# 针对所有文件的配置
+[*]
+# end_of_line = lf # 不配置就让系统自己定
+charset = utf-8
+tab_width = 2
+indent_size = 2
+indent_style = space
+insert_final_newline = false
+trim_trailing_whitespace = true
+# 可以针对不同的文件类型单独配置
+# [*.{js,jsx}]
+# indent_size = 4
+# 也可以针对具体的文件单独配置
+# [{package.json,package-lock.json}]
+# indent_size = 4
