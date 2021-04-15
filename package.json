@@ -1,9 +1,9 @@
 {
-  "name": "xdf-mini-lib",
-  "main": "dist/tool.cjs.js",
-  "module": "dist/tool.esm.js",
-  "browser": "dist/tool.umd.js",
-  "version": "0.1.0",
+  "name": "xdf-mini-lib-test",
+  "main": "dist/lib.cjs.js",
+  "module": "dist/lib.esm.js",
+  "browser": "dist/lib.umd.js",
+  "version": "1.0.2",
   "private": false,
   "dependencies": {
     "@babel/core": "^7.13.10",
@@ -21,9 +21,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "build": "rollup NODE_ENV=production -c ./xdf-mini.config.js",
-    "dev": "rollup -c ./xdf-mini.config.js -w",
-    "add-lib": "plop",
+    "build": "cross-env NODE_ENV=production rollup -c ./xdf-mini.config.js",
+    "dev": "cross-env NODE_ENV=development rollup -c ./xdf-mini.config.js -w",
+    "add-custom": "plop",
+    "add-story": "plop",
     "test": "node test/test.js",
     "publish": "npm publish",
     "publish-private": "npm publish --registry http://172.26.130.15:9081/repository/npm-publish/"
@@ -58,6 +59,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
@@ -66,6 +69,7 @@
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-recommended": "^4.1.0",
@@ -79,11 +83,14 @@
     "install": "^0.13.0",
     "lint-staged": "^10.5.4",
     "node-sass": "^5.0.0",
-    "npm": "^7.6.2",
+    "npm": "^7.8.0",
     "plop": "^2.7.4",
     "postcss": "^8.2.8",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-nested": "^5.0.5",
+    "postcss-simple-vars": "^6.0.3",
     "rollup": "^2.41.0",
-    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-copy-assets": "^2.0.3",
     "rollup-plugin-tslint": "^0.2.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "stylelint": "^13.12.0",

@@ -7,7 +7,11 @@
 ```bash
 npm i
 ```
-## 自动化生辰组件
+
+## 自动化生成组件
+
+storybook： [传送门](https://storybook.js.org/docs/react/get-started/introduction)
+## 定制化生成组件
 
   可以通过脚本, 新增组件。
   ```
@@ -17,10 +21,13 @@ npm i
 
   prop插件: [传送门](https://github.com/plopjs/plop)
 
+## 关于esbuild
+[传送门](https://esbuild.github.io/)
+目前个人感受最深的就是，不够灵活，官方文档也提到，不支持ast操作. 另外的就是生态非常一般，简直太一般了，完全比不上webpack。
 
 ## 写在最后
 ```
-  `应用开发使用webpack，库开发使用rollup`
+  `应用开发使用webpack，库开发使用rollup, 还有esbuild`
   rollup使用起来更加简洁，而且能打出能小体积的文件。但当我s们做前端应用时，性能分析往往要求更小的库，所以rollup更符合开发组件库的要求。
   优：
   输出结果更扁平

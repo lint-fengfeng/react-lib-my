@@ -1,5 +1,6 @@
 // -- APPEND LIB TO HERE --
-import Toast from './Toast';
+import "./static/iconfont.css"
+import Toast from "./Toast"
 
 export {
   // -- APPEND EXPORT TO HERE --

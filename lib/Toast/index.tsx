@@ -1,4 +1,3 @@
-/* eslint-disable no-unreachable,react/prop-types */
 /**
  * author: chengxuefeng
  * time: 2020-02-01
@@ -7,37 +6,36 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import './index.scss';
+import './index.scss'
+class Toast extends React.Component {
+  static maxCount: number
+  static exampleList: any[] = []
+  static duration: number = 2000
+  static rootEl = null
 
-class Toast extends React.PureComponent {
-  static maxCount;
-  static exampleList = [];
-  static duration = 2000;
-  static rootEl = null;
-
-  public props;
+  public props
   // 使用前必须先全局初始化
-  static init (props) {
+  static init(props: any): void {
     Toast.maxCount = props.maxCount || 1
     Toast.exampleList = []
     Toast.duration = props.duration || 2000
     Toast.rootEl = props.rootEl
   }
 
-  static judegMaxCount () {
+  static judegMaxCount() {
     return Toast.exampleList.length < this.maxCount
   }
 
-  static createEl () {
+  static createEl() {
     return document.createElement('div')
   }
 
-  static render (el, props) {
+  static render(el, props) {
     Toast.rootEl.appendChild(el)
     ReactDOM.render(<Toast {...props} />, el)
   }
 
-  static info (props) {
+  static info(props) {
     const el = Toast.createEl()
     if (Toast.judegMaxCount()) {
       Toast.exampleList.push(el)
@@ -50,7 +48,7 @@ class Toast extends React.PureComponent {
     }, Toast.duration)
   }
 
-  static error (props) {
+  static error(props) {
     const el = Toast.createEl()
     if (Toast.judegMaxCount()) {
       Toast.exampleList.push(el)
@@ -64,7 +62,7 @@ class Toast extends React.PureComponent {
     }, props.duration || Toast.duration)
   }
 
-  static hide () {
+  static hide() {
     Toast.rootEl.removeChild(Toast.exampleList[0])
     Toast.exampleList.shift()
   }
@@ -84,11 +82,12 @@ class Toast extends React.PureComponent {
     duration: PropTypes.number
   }
 
-  getContent () {
+  getContent() {
     switch (this.props.type) {
       case 'error':
         return (<>
-          <img className={'icon'} src={require('@/assets/toast-error.svg')} alt=""/>
+          <span className={'icon iconfont icon-failure_toast'}></span>
+          <span className="iconfont">&#x33;</span>
           <div
             className={'error'}
             dangerouslySetInnerHTML={{ __html: this.props.text }}
@@ -97,7 +96,7 @@ class Toast extends React.PureComponent {
         break
       default:
         return (<>
-          <img className={'icon'} src={require(('@/assets/toast-warn.svg'))} alt=""/>
+          <span className={'icon iconfont icon-checked_toast'}></span>
           <div
             className={'info'}
             dangerouslySetInnerHTML={{ __html: this.props.text }}
@@ -107,7 +106,7 @@ class Toast extends React.PureComponent {
     }
   }
 
-  render () {
+  render() {
     return (<div className={'contianer'}>{this.getContent()}</div>
     )
   }
