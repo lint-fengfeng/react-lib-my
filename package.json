@@ -1,5 +1,5 @@
 {
-  "name": "xdf-mini-lib-test",
+  "name": "{{name}}",
   "author": "{{author}}",
   "description": "{{description}}",
   "main": "dist/lib.cjs.js",
