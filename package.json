@@ -1,5 +1,7 @@
 {
   "name": "xdf-mini-lib-test",
+  "author": "{{author}}",
+  "description": "{{description}}",
   "main": "dist/lib.cjs.js",
   "module": "dist/lib.esm.js",
   "browser": "dist/lib.umd.js",
