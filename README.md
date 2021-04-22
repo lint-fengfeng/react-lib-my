@@ -1,51 +1,67 @@
-## 介绍
+## 一、介绍
 可以自动化（storybook）生成可配置的前端react组件，也支持React Hooks模板、和类组件动态生成。
 自动化参考：storybook： [传送门](https://storybook.js.org/docs/react/get-started/introduction)
+## 二、新增组件
 
-##  发布
+1. 进入组件目录下, 执行脚本，完成简单的问询，在lib目录下可以生成对应组件和样式文件，并自动引入；并且在入口文件已经自动引入该新增组件。
 ```bash
-  npm publish
+npm add-custom
 ```
 
-## 安装
+2. 要注意：组件开发需要使遵循typescript规范。
+## 三、调试
+
+1. 在example中，有一个小型的react项目demo，新增好组件后，命令行执行：
 ```bash
+npm run dev
+```
+
+2. 之后你的组件就打包成一个dist包，可以在example目录下，将react项目启动，然后引入我们新打好的dist包，然后可以测试我们刚刚 开发好的组件
+## 四、发布 / 取消发布 / 下载
+在测试组件无误后，需要将组件库发布到我们的私有仓库，这里要注意我们的私仓，发布是一个地址，下载又是另一个地址，首先看发布：
+
+1. 发布b包
+```bash
+# 一、
+nrm ls
+##### 两个源, 第一个下载用，第二个发布用
+##### private ---- http://172.26.130.15:9081/repository/npmjs.org/
+##### private_publish  http://172.26.130.15:9081/repository/npm-publish/
+nrm use private_publish
+npm publish
+# 二、
+npm pulish --registry http://172.26.130.15:9081/repository/npm-publish/
+```
+
+2. 取消发布（此时需要切换源）：
+```bash
+# 一、
+nrm ls
+##### 两个源, 第一个下载用，第二个发布用
+##### private ---- http://172.26.130.15:9081/repository/npmjs.org/
+##### private_publish  http://172.26.130.15:9081/repository/npm-publish/
+nrm use private_publish
+npm unpublish [packageName] --force
+```
+
+3. 下载包（此时需要切换源）:
+```bash
+# 一、
+nrm ls
+##### 两个源, 第一个下载用，第二个发布用
+##### private ---- http://172.26.130.15:9081/repository/npmjs.org/
+##### private_publish  http://172.26.130.15:9081/repository/npm-publish/
+nrm use private #
 npm i
-```
-
-## 自动化生成组件
-
-storybook： [传送门](https://storybook.js.org/docs/react/get-started/introduction)
-## 定制化生成组件
-
-  可以通过脚本, 新增组件。
-  ```
-    npm run add-lib
-  ```
-
-
-  prop插件: [传送门](https://github.com/plopjs/plop)
-
-
-## 安装
-
-1. 在packag.json中添加scripts
-```bash
+# 二、
+npm i [packageName] --save --registry http://172.26.130.15:9081/repository/npmjs.org/
+在确定dependency中已经有这个包之后，package.json的scripts中增加
 "scripts": {
-	"setup"; "npm i --registry http://172.26.130.15:9081/repository/npmjs.org/"
+	"setup": 'npm i --registry http://172.26.130.15:9081/repository/npmjs.org/'
 }
+直接执行npm run setup 就可以完成安装啦
 ```
-然后在项目目录下执行：
-```bash
-npm i
-```
-
-2. 直接项目目录下第二种方法
-```bash
-npm i
-npm i xdf-mini-lib --registry http://172.26.130.15:9081/repository/npmjs.org/
-```
-## 三、用法
-## 四、使用rollup + tenser + ts、tslint
+## 五、使用rollup + tenser + ts、tslint
 ### 1. 对比esbuild、webpack、rollup+ tenser：
 ```
 `
@@ -67,29 +83,7 @@ import "swiper/dist/style.css"
 ```
 
 
-### 五、集成iconfont
+### 六、集成iconfont
 
 - iconfont： [https://www.iconfont.cn/?spm=a313x.7781069.1998910419.d4d0a486a](https://www.iconfont.cn/?spm=a313x.7781069.1998910419.d4d0a486a)
 - 测试仓库地址： [https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.db775f1f3&manage_type=myprojects&projectId=2217708&keyword=&project_type=&page=](https://www.iconfont.cn/manage/index?spm=a313x.7781069.1998910419.db775f1f3&manage_type=myprojects&projectId=2217708&keyword=&project_type=&page=)
-
-
-## 关于esbuild
-[传送门](https://esbuild.github.io/)
-目前个人感受最深的就是，不够灵活，官方文档也提到，不支持ast操作. 另外的就是生态非常一般，简直太一般了，完全比不上webpack。
-
-## 写在最后
-```
-  `应用开发使用webpack，库开发使用rollup, 还有esbuild`
-  rollup使用起来更加简洁，而且能打出能小体积的文件。但当我s们做前端应用时，性能分析往往要求更小的库，所以rollup更符合开发组件库的要求。
-  优：
-  输出结果更扁平
-  自动移除未引用代码
-  打包结果依然完全可读
-  缺：
-  加载非ESM第三方模块比较复杂
-  模块最终都被打包到一个函数中，无法实现HMR（热替换）
-  浏览器环境中，代码拆分功能依赖AMD库
-
-  开发更适用于css,js,图片，html的web应用
-  开发框架类库 rollup ,这里由于是组件库，优点很有用，缺点可以忽略不计，所以用了rollup
-```
