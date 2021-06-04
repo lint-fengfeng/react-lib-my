@@ -20,47 +20,6 @@ npm run dev
 ## 四、发布 / 取消发布 / 下载
 在测试组件无误后，需要将组件库发布到我们的私有仓库，这里要注意我们的私仓，发布是一个地址，下载又是另一个地址，首先看发布：
 
-1. 发布b包
-```bash
-# 一、
-nrm ls
-##### 两个源, 第一个下载用，第二个发布用
-##### private ---- http://172.26.130.15:9081/repository/npmjs.org/
-##### private_publish  http://172.26.130.15:9081/repository/npm-publish/
-nrm use private_publish
-npm publish
-# 二、
-npm pulish --registry http://172.26.130.15:9081/repository/npm-publish/
-```
-
-2. 取消发布（此时需要切换源）：
-```bash
-# 一、
-nrm ls
-##### 两个源, 第一个下载用，第二个发布用
-##### private ---- http://172.26.130.15:9081/repository/npmjs.org/
-##### private_publish  http://172.26.130.15:9081/repository/npm-publish/
-nrm use private_publish
-npm unpublish [packageName] --force
-```
-
-3. 下载包（此时需要切换源）:
-```bash
-# 一、
-nrm ls
-##### 两个源, 第一个下载用，第二个发布用
-##### private ---- http://172.26.130.15:9081/repository/npmjs.org/
-##### private_publish  http://172.26.130.15:9081/repository/npm-publish/
-nrm use private #
-npm i
-# 二、
-npm i [packageName] --save --registry http://172.26.130.15:9081/repository/npmjs.org/
-在确定dependency中已经有这个包之后，package.json的scripts中增加
-"scripts": {
-	"setup": 'npm i --registry http://172.26.130.15:9081/repository/npmjs.org/'
-}
-直接执行npm run setup 就可以完成安装啦
-```
 ## 五、使用rollup + tenser + ts、tslint
 ### 1. 对比esbuild、webpack、rollup+ tenser：
 ```
